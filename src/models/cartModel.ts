@@ -32,3 +32,6 @@ const CartSchema = new Schema<ICart>({
 const cartModel = mongoose.model<ICart>('Cart', CartSchema);
 
 export default cartModel;
+
+// probleme de Type dans l'interface userId et product 
+// et enum 

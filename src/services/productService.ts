@@ -5,13 +5,19 @@ export const getAllProducts = async () => {
 };
 
 export const seedInitialProducts = async () => {
-    const products = [
-        {title: "iPhone 16 Pro MAX " , image: "iphone16promax.png", price: 1800 , stock: 100},
-    ];
+    try {
+        
+        const products = [
+            {title: "iPhone 16 Pro MAX " , image: "iphone16promax.png", price: 1800 , stock: 100},
+        ];
 
-    const existingProducts = await getAllProducts();
+        const existingProducts = await getAllProducts();
 
-    if(existingProducts.length === 0){
-       await productModel.insertMany(products);
+        if(existingProducts.length === 0){
+            await productModel.insertMany(products);
+        }
+
+    } catch(err) {
+       console.error("cannot see database", err);
     }
 };

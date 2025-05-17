@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import userRoute from "./routes/userRoute";
 import { seedInitialProducts } from "./services/productService";
 import productRoutes from "./routes/productRoute";
+import cartRoutes from "./routes/cartRoute";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = 3001;
@@ -10,7 +14,7 @@ const port = 3001;
 app.use(express.json());
 
 mongoose
-    .connect("mongodb://localhost:27017/ecommerce")
+    .connect(process.env.MONGO_URI || '')
     .then(()=> console.log("Mongo connected!"))
     .catch((err) => console.log("failed to connect!", err));
     
@@ -19,6 +23,7 @@ mongoose
     
     app.use("/user",userRoute);
     app.use("/products", productRoutes);
+    app.use("/cart", cartRoutes);
 
 
     app.listen(port, () => {
